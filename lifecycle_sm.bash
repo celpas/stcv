@@ -66,7 +66,7 @@ sudo mkdir -p $MONGODB_DATA_DIR
 sudo mongod --fork --dbpath $MONGODB_DATA_DIR --bind_ip_all --logpath /var/log/mongodb/mongod.log
 
 echo "=> Clong STCV repository"
-sudo -u ec2-user git clone -b v0.5 --depth 1 \
+sudo -u ec2-user git clone -b feature/finder --depth 1 \
                  https://github.com/celpas/stcv.git \
                  /home/ec2-user/cv-utils
 
