@@ -73,7 +73,7 @@ sudo -u ec2-user git clone -b v0.5 --depth 1 \
                  /home/ec2-user/cv-utils
 
 echo "=> Installing PHP"
-sudo amazon-linux-extras install php7.1 -y
+sudo amazon-linux-extras install php7.4 -y
 sudo yum install php-gd -y
 sudo chown ec2-user:ec2-user /var/log/php-fpm/ -R
 sudo chown ec2-user:ec2-user /run/php-fpm/ -R
