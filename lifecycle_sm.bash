@@ -29,7 +29,7 @@ sudo -u ec2-user wget https://github.com/kahing/goofys/releases/download/v0.24.0
 sudo -u ec2-user chmod a+x /home/ec2-user/goofys
 
 echo "=> Mounting S3 bucket"
-export BUCKET=<<BUCKET_NAME>>
+export BUCKET=enel-noprod-glhl-ap05352-sandbox
 export MNT_DIR=/tmp/bucket
 sudo -u ec2-user mkdir -p $MNT_DIR
 sudo -u ec2-user chmod a+w $MNT_DIR
@@ -65,16 +65,28 @@ export MONGODB_DATA_DIR=/home/ec2-user/SageMaker/.mongodb_data
 sudo mkdir -p $MONGODB_DATA_DIR
 sudo mongod --fork --dbpath $MONGODB_DATA_DIR --bind_ip_all --logpath /var/log/mongodb/mongod.log
 
+echo "=> Clong STCV repository"
+sudo -u ec2-user git clone -b v0.5 --depth 1 \
+                 https://github.com/celpas/stcv.git \
+                 /home/ec2-user/cv-utils
+
+echo "=> Installing PHP"
+sudo amazon-linux-extras install php7.1 -y
+sudo yum install php-gd -y
+sudo chown ec2-user:ec2-user /var/log/php-fpm/ -R
+sudo chown ec2-user:ec2-user /run/php-fpm/ -R
+sudo chown ec2-user:ec2-user /etc/php-fpm.d/ -R
+sudo -u ec2-user cp /home/ec2-user/cv-utils/php/www.conf /etc/php-fpm.d/www.conf
+sudo -u ec2-user mkdir /home/ec2-user/.finder_trash
+sudo -u ec2-user mkdir /home/ec2-user/.thumb
+sudo -u ec2-user /usr/sbin/php-fpm
+
 echo "=> Installing nginx"
 sudo yum install nginx -y
 sudo rm -f /etc/nginx/nginx.conf
-sudo curl \
-          -o /etc/nginx/nginx.conf \
-          https://raw.githubusercontent.com/celpas/stcv/main/nginx/nginx.conf
-sudo rm -f /usr/share/nginx/html/index.html
-sudo curl \
-          -o /usr/share/nginx/html/index.html \
-          https://raw.githubusercontent.com/celpas/stcv/nginx/index.html
+sudo cp /home/ec2-user/cv-utils/nginx/nginx.conf /etc/nginx/nginx.conf 
+sudo chown ec2-user:ec2-user /usr/share/nginx/ -R
+sudo -u ec2-user cp -ar /home/ec2-user/cv-utils/nginx/www/. /usr/share/nginx/html/
 sudo systemctl restart nginx
 
 echo "=> Installing code-server"
