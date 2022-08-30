@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# Set bucket name
+export BUCKET="<<BUCKET_NAME>>"
+
 # Disable exit if there is an error
 set +e
 
@@ -29,7 +32,6 @@ sudo -u ec2-user wget https://github.com/kahing/goofys/releases/download/v0.24.0
 sudo -u ec2-user chmod a+x /home/ec2-user/goofys
 
 echo "=> Mounting S3 bucket"
-export BUCKET=enel-noprod-glhl-ap05352-sandbox
 export MNT_DIR=/tmp/bucket
 sudo -u ec2-user mkdir -p $MNT_DIR
 sudo -u ec2-user chmod a+w $MNT_DIR
@@ -66,7 +68,7 @@ sudo mkdir -p $MONGODB_DATA_DIR
 sudo mongod --fork --dbpath $MONGODB_DATA_DIR --bind_ip_all --logpath /var/log/mongodb/mongod.log
 
 echo "=> Clong STCV repository"
-sudo -u ec2-user git clone -b feature/finder --depth 1 \
+sudo -u ec2-user git clone -b v0.5 --depth 1 \
                  https://github.com/celpas/stcv.git \
                  /home/ec2-user/cv-utils
 

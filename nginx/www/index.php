@@ -86,6 +86,14 @@
 			<div style="background-color: #FFFFFF;border: 1px solid #bbb;border-radius: 10px; padding: 30px;box-shadow: 0 0 16px #ccc;">
 				<table>
 					<tr>
+						<td class="c1"><img src="icons/jp.png" width="64" height="64" /></td>
+						<td>
+							<a target="_blank" href="/lab">
+								<button class="w-100 btn btn-lg btn-primary" type="submit">JupyterLab</button>
+							</a>
+						</td>
+					</tr>
+					<tr>
 						<td class="c1"><img src="icons/vscode.png" width="64" height="64" /></td>
 						<td>
 							<a target="_blank" href="/proxy/1199/code/">
