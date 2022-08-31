@@ -1,12 +1,4 @@
 #!/bin/bash
-# Installs the `fiftyone` package and its dependencies.
-#
-# Usage:
-#   bash install.bash
-#
-# Copyright 2017-2022, Voxel51, Inc.
-# voxel51.com
-#
 
 
 # Show usage information
@@ -52,33 +44,27 @@ if [ ${BUILD_APP} = true ]; then
 fi
 
 
-if [ ${DEV_INSTALL} = true ]; then
-    echo "***** INSTALLING FIFTYONE-BRAIN *****"
-    pip install fiftyone-brain
-fi
-
-
 echo "***** INSTALLING FIFTYONE *****"
 if [ ${DEV_INSTALL} = true ]; then
-    echo "***** INSTALLING DEPENDENCIES *****"
+    pip uninstall fiftyone fiftyone-brain fiftyone-db
+
+    echo "***** INSTALLING FIFTYONE-BRAIN *****"
+    pip install fiftyone-brain
+
+    echo "***** INSTALLING FIFTYONE *****"
     pip install -r requirements.txt
     pip install .
     pip uninstall opencv-python -y
     pip install opencv-python==4.1.2.30
     pip uninstall opencv-python-headless -y
     pip install opencv-python-headless==4.1.2.30
-fi
 
-
-if [ ${DEV_INSTALL} = true ]; then
     echo "***** INSTALLING ETA *****"
     if [[ ! -d "eta" ]]; then
         echo "Cloning ETA repository"
         git clone https://github.com/voxel51/eta
     fi
     cd eta
-    git checkout develop
-    git pull
     pip install .
     if [[ ! -f eta/config.json ]]; then
         echo "Installing default ETA config"
