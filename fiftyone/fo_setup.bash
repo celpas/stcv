@@ -46,7 +46,7 @@ fi
 
 echo "***** INSTALLING FIFTYONE *****"
 if [ ${DEV_INSTALL} = true ]; then
-    pip uninstall fiftyone fiftyone-brain fiftyone-db voxel51-eta
+    pip uninstall fiftyone fiftyone-brain fiftyone-db voxel51-eta -y
 
     echo "***** INSTALLING FIFTYONE-BRAIN *****"
     pip install fiftyone-brain
