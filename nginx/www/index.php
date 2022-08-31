@@ -62,7 +62,7 @@
 	}
 
 	img:hover {
-		transform: rotate(360deg);
+		transform: rotate(360deg) scale(1.1);
 	}
 	</style>
 </head>

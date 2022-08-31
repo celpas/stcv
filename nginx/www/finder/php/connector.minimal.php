@@ -149,20 +149,37 @@ $opts = array(
 	'roots' => array(
 		// Items volume
 		array(
-			'driver'        => 'LocalFileSystem',           // driver for accessing file system (REQUIRED)
+			'driver'        => 'LocalFileSystem',
 			'path'          => '/',
-			//'URL'           => dirname($_SERVER['PHP_SELF']) . '/',
 			'imgLib'        => 'auto',
 			'tmbPath'       => '../../../../../../home/ec2-user/.thumb',
 			'tmbURL'        => '/proxy/1199/files/home/ec2-user/.thumb/',
 			'tmbSize'       => 64,
 			'tmbCrop'       => false,
-			'trashHash'     => 't1_Lw',                     // elFinder's hash of trash folder
-			'winHashFix'    => DIRECTORY_SEPARATOR !== '/', // to make hash same to Linux one on windows too
-			'uploadDeny'    => array('all'),                // All Mimetypes not allowed to upload
-			'uploadAllow'   => array('image/x-ms-bmp', 'image/gif', 'image/jpeg', 'image/png', 'image/x-icon', 'text/plain'), // Mimetype `image` and `text/plain` allowed to upload
-			'uploadOrder'   => array('deny', 'allow'),      // allowed Mimetype `image` and `text/plain` only
-			'accessControl' => 'access'                     // disable and hide dot starting files (OPTIONAL)
+			'trashHash'     => 't1_Lw',
+			'winHashFix'    => DIRECTORY_SEPARATOR !== '/',
+			'uploadDeny'    => array('all'),
+			//'uploadAllow'   => array('all'),
+			'uploadOrder'   => array('deny', 'allow'),
+			'accessControl' => 'access',
+			'checkSubfolders' => false
+		),
+		// Items volume
+		array(
+			'driver'        => 'LocalFileSystem',
+			'path'          => '/tmp/bucket/',
+			'imgLib'        => 'auto',
+			'tmbPath'       => '../../../../../../home/ec2-user/.thumb',
+			'tmbURL'        => '/proxy/1199/files/home/ec2-user/.thumb/',
+			'tmbSize'       => 64,
+			'tmbCrop'       => false,
+			'trashHash'     => 't1_Lw',
+			'winHashFix'    => DIRECTORY_SEPARATOR !== '/',
+			'uploadDeny'    => array('all'),
+			//'uploadAllow'   => array('all'),
+			'uploadOrder'   => array('deny', 'allow'),
+			'accessControl' => 'access',
+			'checkSubfolders' => false
 		),
 		// Trash volume
 		array(
@@ -174,11 +191,11 @@ $opts = array(
 			'tmbURL'        => '/proxy/1199/files/home/ec2-user/.thumb/',
 			'tmbSize'       => 64,
 			'tmbCrop'       => false,
-			'winHashFix'    => DIRECTORY_SEPARATOR !== '/', // to make hash same to Linux one on windows too
-			'uploadDeny'    => array('all'),                // Recomend the same settings as the original volume that uses the trash
-			'uploadAllow'   => array('image/x-ms-bmp', 'image/gif', 'image/jpeg', 'image/png', 'image/x-icon', 'text/plain'), // Same as above
-			'uploadOrder'   => array('deny', 'allow'),      // Same as above
-			'accessControl' => 'access',                    // Same as above
+			'winHashFix'    => DIRECTORY_SEPARATOR !== '/',
+			'uploadDeny'    => array('all'),
+			//'uploadAllow'   => array('all'),
+			'uploadOrder'   => array('deny', 'allow'),
+			'accessControl' => 'access',
 		),
 	)
 );

@@ -23,6 +23,7 @@ envs_dirs:
   - ${PERSISTED_CONDA_DIR}
   - /home/ec2-user/anaconda3/envs
 EOF
+conda config --set env_prompt '($(basename {default_env}))'
 
 echo "=> Installing Goofys dependencies"
 sudo amazon-linux-extras install epel -y
@@ -58,7 +59,7 @@ sudo wget https://repo.mongodb.org/yum/amazon/2/mongodb-org/5.0/x86_64/RPMS/mong
 sudo yum localinstall mon*.rpm -y
 
 echo "=> Updating nbserverproxy"
-sudo -u ec2-user /home/ec2-user/anaconda3/envs/JupyterSystemEnv/bin/pip uninstall -y nbserverproxy
+sudo -u ec2-user /home/ec2-user/anaconda3/envs/JupyterSystemEnv/bin/pip uninstall -y nbserverproxy jupyter-server-proxy
 sudo -u ec2-user /home/ec2-user/anaconda3/envs/JupyterSystemEnv/bin/pip install git+https://github.com/jupyterhub/jupyter-server-proxy.git
 sudo systemctl restart jupyter-server
 
@@ -67,8 +68,8 @@ export MONGODB_DATA_DIR=/home/ec2-user/SageMaker/.mongodb_data
 sudo mkdir -p $MONGODB_DATA_DIR
 sudo mongod --fork --dbpath $MONGODB_DATA_DIR --bind_ip_all --logpath /var/log/mongodb/mongod.log
 
-echo "=> Clong STCV repository"
-sudo -u ec2-user git clone -b v0.5 --depth 1 \
+echo "=> Cloning STCV repository"
+sudo -u ec2-user git clone -b v0.6 --depth 1 \
                  https://github.com/celpas/stcv.git \
                  /home/ec2-user/cv-utils
 
