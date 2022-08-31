@@ -23,7 +23,6 @@ envs_dirs:
   - ${PERSISTED_CONDA_DIR}
   - /home/ec2-user/anaconda3/envs
 EOF
-conda config --set env_prompt '($(basename {default_env}))'
 
 echo "=> Installing Goofys dependencies"
 sudo amazon-linux-extras install epel -y
