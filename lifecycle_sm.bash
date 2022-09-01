@@ -68,7 +68,7 @@ sudo mkdir -p $MONGODB_DATA_DIR
 sudo mongod --fork --dbpath $MONGODB_DATA_DIR --bind_ip_all --logpath /var/log/mongodb/mongod.log
 
 echo "=> Cloning STCV repository"
-sudo -u ec2-user git clone -b v0.7.1 \
+sudo -u ec2-user git clone -b v0.7.2 \
                  https://github.com/celpas/stcv.git \
                  /home/ec2-user/cv-utils
 
@@ -89,6 +89,7 @@ sudo rm -f /etc/nginx/nginx.conf
 sudo cp /home/ec2-user/cv-utils/nginx/nginx.conf /etc/nginx/nginx.conf 
 sudo chown ec2-user:ec2-user /usr/share/nginx/ -R
 sudo -u ec2-user cp -ar /home/ec2-user/cv-utils/nginx/www/. /usr/share/nginx/html/
+sudo chown ec2-user:ec2-user /var/lib/nginx/ -R
 sudo systemctl restart nginx
 
 echo "=> Installing code-server"
@@ -105,3 +106,10 @@ password: 9bdf71aa2d84a20e70e73b0e
 cert: false
 EOF
 sudo systemctl start code-server@ec2-user
+
+echo "=> Removing environment bash prefix"
+sudo -u ec2-user -i << 'EOF'
+conda activate JupyterSystemEnv
+conda config --set env_prompt '($(basename {default_env})) '
+conda deactivate
+EOF
