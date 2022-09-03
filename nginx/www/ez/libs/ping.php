@@ -8,7 +8,7 @@ $datas = array();
 if (count($Config->get('ping:hosts')) > 0)
     $hosts = $Config->get('ping:hosts');
 else
-    $hosts = array('google.com', 'wikipedia.org');
+    $hosts = array();
 
 foreach ($hosts as $host)
 {

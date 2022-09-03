@@ -2,13 +2,13 @@
     "esm": {
         "version": "2.5",
         "website": "http://www.ezservermonitor.com",
-        "check_updates": true,
+        "check_updates": false,
         "auto_refresh": 0,
         "theme": "blue",
         "custom_title": ""
     },
     "cpu": {
-        "enable_temperature": true
+        "enable_temperature": false
     },
     "disk": {
         "show_tmpfs": false,
@@ -17,47 +17,37 @@
         "ignore_mounts": []
     },
     "ping": {
-        "hosts": [
-            "facebook.com",
-            "google.com",
-            "yahoo.com"
-        ]
+        "hosts": []
     },
     "last_login": {
-        "enable": true,
+        "enable": false,
         "max": 5
     },
     "services": {
         "show_port": true,
         "list": [
             {
-                "name": "Web Server",
+                "name": "VS Code",
                 "host": "localhost",
-                "port": 80,
+                "port": 8080,
                 "protocol": "tcp"
             },
             {
-                "name": "Email Server (incoming)",
+                "name": "Label Studio",
                 "host": "localhost",
-                "port": 993,
+                "port": 6006,
                 "protocol": "tcp"
             },
             {
-                "name": "Email Server (outgoing)",
+                "name": "TensorBoard",
                 "host": "localhost",
-                "port": 587,
+                "port": 6007,
                 "protocol": "tcp"
             },
             {
-                "name": "FTP Server",
+                "name": "FiftyOne",
                 "host": "localhost",
-                "port": 21,
-                "protocol": "tcp"
-            },
-            {
-                "name": "Database Server",
-                "host": "localhost",
-                "port": 3306,
+                "port": 6008,
                 "protocol": "tcp"
             },
             {
