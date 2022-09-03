@@ -66,77 +66,86 @@
 	}
 	</style>
 </head>
-<?php
-        // Read the JSON file
-        $json = file_get_contents('/opt/ml/metadata/resource-metadata.json');
-        // Decode the JSON file
-        $json_data = json_decode($json,true);
-        $resource_arn = $json_data['ResourceArn'];
-        $resource_name = $json_data['ResourceName'];
-    ?>
 
-	<body class="text-center">
-		<main class="form-signin w-100 m-auto" style="max-width: 500px;">
-			<p style="font-size: 12px;"> <strong>Resource ARN: </strong>
-				<?php echo $resource_arn; ?>
-			</p>
-			<p style="font-size: 12px;"> <strong>Resource name: </strong>
-				<?php echo $resource_name; ?>
-			</p>
-			<div style="background-color: #FFFFFF;border: 1px solid #bbb;border-radius: 10px; padding: 30px;box-shadow: 0 0 16px #ccc;">
-				<table>
-					<tr>
-						<td class="c1"><img src="icons/jp.png" width="64" height="64" /></td>
-						<td>
-							<a target="_blank" href="/lab">
-								<button class="w-100 btn btn-lg btn-primary" type="submit">JupyterLab</button>
-							</a>
-						</td>
-					</tr>
-					<tr>
-						<td class="c1"><img src="icons/vscode.png" width="64" height="64" /></td>
-						<td>
-							<a target="_blank" href="/proxy/1199/code/">
-								<button class="w-100 btn btn-lg btn-primary" type="submit">VS Code</button>
-							</a>
-						</td>
-					</tr>
-					<tr>
-						<td class="c1"><img src="icons/tb.png" width="64" height="64" /></td>
-						<td>
-							<a target="_blank" href="/proxy/1199/tb/">
-								<button class="w-100 btn btn-lg btn-primary" type="submit">TensorBoard</button>
-							</a>
-						</td>
-					</tr>
-					<tr>
-						<td class="c1"><img src="icons/ls.png" width="64" height="64" /></td>
-						<td>
-							<a target="_blank" href="/proxy/1199/ls/">
-								<button class="w-100 btn btn-lg btn-primary" type="submit">Label Studio</button>
-							</a>
-						</td>
-					</tr>
-					<tr>
-						<td class="c1"><img src="icons/f1.png" width="64" height="64" /></td>
-						<td>
-							<a target="_blank" href="/proxy/1199/f1/?polling=true">
-								<button class="w-100 btn btn-lg btn-primary" type="submit">FiftyOne</button>
-							</a>
-						</td>
-					</tr>
-					<tr>
-						<td class="c1"><img src="icons/finder.png" width="64" height="64" /></td>
-						<td>
-							<a target="_blank" href="/proxy/1199/finder/elfinder.html">
-								<button class="w-100 btn btn-lg btn-primary" type="submit">Finder</button>
-							</a>
-						</td>
-					</tr>
-				</table>
-			</div>
-			<p class="mt-2 mb-3 text-muted">&copy; 2022 &bull; v0.7.2</p>
-		</main>
-	</body>
+<?php
+	// Read the JSON file
+	$json = file_get_contents('/opt/ml/metadata/resource-metadata.json');
+	// Decode the JSON file
+	$json_data = json_decode($json,true);
+	$resource_arn = $json_data['ResourceArn'];
+	$resource_name = $json_data['ResourceName'];
+?>
+
+<body class="text-center">
+	<main class="form-signin w-100 m-auto" style="max-width: 500px;">
+		<p style="font-size: 12px;"> <strong>Resource ARN: </strong>
+			<?php echo $resource_arn; ?>
+		</p>
+		<p style="font-size: 12px;"> <strong>Resource name: </strong>
+			<?php echo $resource_name; ?>
+		</p>
+		<div style="background-color: #FFFFFF;border: 1px solid #bbb;border-radius: 10px; padding: 30px;box-shadow: 0 0 16px #ccc;">
+			<table>
+				<tr>
+					<td class="c1"><img src="icons/jp.png" width="64" height="64" /></td>
+					<td>
+						<a target="_blank" href="/lab">
+							<button class="w-100 btn btn-lg btn-primary" type="submit">JupyterLab</button>
+						</a>
+					</td>
+				</tr>
+				<tr>
+					<td class="c1"><img src="icons/vscode.png" width="64" height="64" /></td>
+					<td>
+						<a target="_blank" href="/proxy/1199/code/">
+							<button class="w-100 btn btn-lg btn-primary" type="submit">VS Code</button>
+						</a>
+					</td>
+				</tr>
+				<tr>
+					<td class="c1"><img src="icons/tb.png" width="64" height="64" /></td>
+					<td>
+						<a target="_blank" href="/proxy/1199/tb/">
+							<button class="w-100 btn btn-lg btn-primary" type="submit">TensorBoard</button>
+						</a>
+					</td>
+				</tr>
+				<tr>
+					<td class="c1"><img src="icons/ls.png" width="64" height="64" /></td>
+					<td>
+						<a target="_blank" href="/proxy/1199/ls/">
+							<button class="w-100 btn btn-lg btn-primary" type="submit">Label Studio</button>
+						</a>
+					</td>
+				</tr>
+				<tr>
+					<td class="c1"><img src="icons/f1.png" width="64" height="64" /></td>
+					<td>
+						<a target="_blank" href="/proxy/1199/f1/?polling=true">
+							<button class="w-100 btn btn-lg btn-primary" type="submit">FiftyOne</button>
+						</a>
+					</td>
+				</tr>
+				<tr>
+					<td class="c1"><img src="icons/finder.png" width="64" height="64" /></td>
+					<td>
+						<a target="_blank" href="/proxy/1199/finder/elfinder.html">
+							<button class="w-100 btn btn-lg btn-primary" type="submit">elFinder</button>
+						</a>
+					</td>
+				</tr>
+				<tr>
+					<td class="c1"><img src="icons/ez.png" width="64" height="64" /></td>
+					<td>
+						<a target="_blank" href="/proxy/1199/ez/">
+							<button class="w-100 btn btn-lg btn-primary" type="submit">eZ Server Monitor</button>
+						</a>
+					</td>
+				</tr>
+			</table>
+		</div>
+		<p class="mt-2 mb-3 text-muted">&copy; 2022 &bull; v0.8</p>
+	</main>
+</body>
 
 </html>

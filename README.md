@@ -7,7 +7,7 @@
 - Persistent conda environments
 - S3 bucket mounting
 - Upgrade of jupyter-server-proxy
-- Some useful tools: VS Code, Label Studio, FiftyOne, TensorBoard and elFinder
+- Some useful tools: VS Code, Label Studio, FiftyOne, TensorBoard, elFinder and eZ Server Monitor
 
 
 ## Instructions
