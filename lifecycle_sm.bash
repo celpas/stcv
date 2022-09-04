@@ -1,7 +1,11 @@
 #!/bin/bash
 
-# Set bucket name
-export BUCKET="<<BUCKET_NAME>>"
+# Parameters
+export STCV_VERSION="v0.8.2"
+export REGION="eu-central-1"
+export BUCKET_NAME="<<BUCKET_NAME>>"
+export BUCKET_MNT_DIR="/tmp/bucket"
+export MONGODB_DATA_DIR="/home/ec2-user/SageMaker/.mongodb_data"
 
 # Disable exit if there is an error
 set +e
@@ -24,7 +28,7 @@ envs_dirs:
   - /home/ec2-user/anaconda3/envs
 EOF
 
-echo "=> Installing Goofys dependencies"
+echo "=> Installing Goofys"
 sudo amazon-linux-extras install epel -y
 sudo yum install s3fs-fuse -y
 sudo yum install golang -y
@@ -32,11 +36,10 @@ sudo -u ec2-user wget https://github.com/kahing/goofys/releases/download/v0.24.0
 sudo -u ec2-user chmod a+x /home/ec2-user/goofys
 
 echo "=> Mounting S3 bucket"
-export MNT_DIR=/tmp/bucket
 sudo -u ec2-user mkdir -p $MNT_DIR
 sudo -u ec2-user chmod a+w $MNT_DIR
-sudo -u ec2-user /home/ec2-user/goofys --uid 1000 --gid 1000 --region eu-central-1 $BUCKET $MNT_DIR
-#s3fs $BUCKET $MNT_DIR -o umask=0007,uid=1000,gid=1000,endpoint=eu-central-1,iam_role=auto
+sudo -u ec2-user /home/ec2-user/goofys --uid 1000 --gid 1000 --region $REGION $BUCKET_NAME $BUCKET_MNT_DIR
+#s3fs $BUCKET_NAME $BUCKET_MNT_DIR -o umask=0007,uid=1000,gid=1000,endpoint=$REGION,iam_role=auto
 
 echo "=> Installing NodeJS"
 sudo yum remove libuv -y
@@ -57,18 +60,18 @@ sudo wget https://repo.mongodb.org/yum/amazon/2/mongodb-org/5.0/x86_64/RPMS/mong
 sudo wget https://repo.mongodb.org/yum/amazon/2/mongodb-org/5.0/x86_64/RPMS/mongodb-database-tools-100.5.4.x86_64.rpm
 sudo yum localinstall mon*.rpm -y
 
+# To include bugfix PR328: https://github.com/jupyterhub/jupyter-server-proxy/pull/328
 echo "=> Updating nbserverproxy"
 sudo -u ec2-user /home/ec2-user/anaconda3/envs/JupyterSystemEnv/bin/pip uninstall -y nbserverproxy jupyter-server-proxy
 sudo -u ec2-user /home/ec2-user/anaconda3/envs/JupyterSystemEnv/bin/pip install git+https://github.com/jupyterhub/jupyter-server-proxy.git
 sudo systemctl restart jupyter-server
 
 echo "=> Starting MongoDB as a daemon"
-export MONGODB_DATA_DIR=/home/ec2-user/SageMaker/.mongodb_data
 sudo mkdir -p $MONGODB_DATA_DIR
 sudo mongod --fork --dbpath $MONGODB_DATA_DIR --bind_ip_all --logpath /var/log/mongodb/mongod.log
 
 echo "=> Cloning STCV repository"
-sudo -u ec2-user git clone -b v0.8.1 \
+sudo -u ec2-user git clone -b $STCV_VERSION \
                  https://github.com/celpas/stcv.git \
                  /home/ec2-user/cv-utils
 
@@ -105,6 +108,8 @@ auth: none
 password: 9bdf71aa2d84a20e70e73b0e
 cert: false
 EOF
+sudo -u ec2-user code-server --install-extension ms-python.python --force
+sudo -u ec2-user code-server --install-extension ms-toolsai.jupyter --force
 sudo systemctl start code-server@ec2-user
 
 echo "=> Removing environment bash prefix"

@@ -2,6 +2,7 @@
 
 ![alt splash](_data/splash.jpeg)
 
+
 ## Features
 
 - Persistent conda environments
@@ -14,5 +15,11 @@
 
 1. Set [lifecycle configuration](/lifecycle_sm.bash) to your SageMaker notebook instance (remember to set your bucket name).
 2. Visit ```https://<<INSTANCE_NAME>>.notebook.<<REGION>>.sagemaker.aws/proxy/1199/```.
+3. Done!
 
 Note that VSCode starts automatically while for other tools the relative notebook should be used.
+
+
+## Requirements
+
+A notebook instance with Amazon Linux 2.

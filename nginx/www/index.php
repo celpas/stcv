@@ -144,7 +144,7 @@
 				</tr>
 			</table>
 		</div>
-		<p class="mt-2 mb-3 text-muted">&copy; 2022 &bull; v0.8.1</p>
+		<p class="mt-2 mb-3 text-muted">&copy; 2022 &bull; v0.8.2</p>
 	</main>
 </body>
 
