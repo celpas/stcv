@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Parameters
-export STCV_VERSION="v0.8.2"
+export STCV_VERSION="v0.8.3"
 export REGION="eu-central-1"
 export BUCKET_NAME="<<BUCKET_NAME>>"
 export BUCKET_MNT_DIR="/tmp/bucket"
@@ -36,8 +36,8 @@ sudo -u ec2-user wget https://github.com/kahing/goofys/releases/download/v0.24.0
 sudo -u ec2-user chmod a+x /home/ec2-user/goofys
 
 echo "=> Mounting S3 bucket"
-sudo -u ec2-user mkdir -p $MNT_DIR
-sudo -u ec2-user chmod a+w $MNT_DIR
+sudo -u ec2-user mkdir -p $BUCKET_MNT_DIR
+sudo -u ec2-user chmod a+w $BUCKET_MNT_DIR
 sudo -u ec2-user /home/ec2-user/goofys --uid 1000 --gid 1000 --region $REGION $BUCKET_NAME $BUCKET_MNT_DIR
 #s3fs $BUCKET_NAME $BUCKET_MNT_DIR -o umask=0007,uid=1000,gid=1000,endpoint=$REGION,iam_role=auto
 
