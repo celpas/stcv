@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Parameters
-export STCV_VERSION="v0.8.3"
+export STCV_VERSION="v0.8.4"
 export REGION="eu-central-1"
 export BUCKET_NAME="<<BUCKET_NAME>>"
 export BUCKET_MNT_DIR="/tmp/bucket"
