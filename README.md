@@ -23,3 +23,13 @@ Note that VSCode starts automatically while for other tools the relative noteboo
 ## Requirements
 
 A notebook instance with Amazon Linux 2.
+
+
+## How to update a lifecycle using CLI?
+
+```bash
+LIFECYCLE_CONFIG_NAME="<<LIFECYCLE_NAME>>"
+aws sagemaker update-notebook-instance-lifecycle-config \
+    --notebook-instance-lifecycle-config-name "$LIFECYCLE_CONFIG_NAME" \
+    --on-start Content="$((cat lifecycle_sm.bash) | base64 -w 0)"
+```

@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Parameters
-export STCV_VERSION="v0.8.4"
+export STCV_VERSION="v0.8.5"
 export REGION="eu-central-1"
 export BUCKET_NAME="<<BUCKET_NAME>>"
 export BUCKET_MNT_DIR="/tmp/bucket"
@@ -63,7 +63,7 @@ sudo yum localinstall mon*.rpm -y
 # To include bugfix PR328: https://github.com/jupyterhub/jupyter-server-proxy/pull/328
 echo "=> Updating nbserverproxy"
 sudo -u ec2-user /home/ec2-user/anaconda3/envs/JupyterSystemEnv/bin/pip uninstall -y nbserverproxy jupyter-server-proxy
-sudo -u ec2-user /home/ec2-user/anaconda3/envs/JupyterSystemEnv/bin/pip install git+https://github.com/jupyterhub/jupyter-server-proxy.git
+sudo -u ec2-user /home/ec2-user/anaconda3/envs/JupyterSystemEnv/bin/pip install jupyter-server-proxy==3.2.2
 sudo systemctl restart jupyter-server
 
 echo "=> Starting MongoDB as a daemon"
