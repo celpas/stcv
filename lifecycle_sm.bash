@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Parameters
-export STCV_VERSION="v0.8.5"
+export STCV_VERSION="v0.8.6"
 export REGION="eu-central-1"
 export BUCKET_NAME="<<BUCKET_NAME>>"
 export BUCKET_MNT_DIR="/tmp/bucket"
@@ -82,6 +82,8 @@ sudo chown ec2-user:ec2-user /var/log/php-fpm/ -R
 sudo chown ec2-user:ec2-user /run/php-fpm/ -R
 sudo chown ec2-user:ec2-user /etc/php-fpm.d/ -R
 sudo -u ec2-user cp /home/ec2-user/cv-utils/php/www.conf /etc/php-fpm.d/www.conf
+sudo rm -f /etc/php.ini
+sudo -u ec2-user cp /home/ec2-user/cv-utils/php/php.ini /etc/php.ini
 sudo -u ec2-user mkdir /home/ec2-user/.finder_trash
 sudo -u ec2-user mkdir /home/ec2-user/.thumb
 sudo -u ec2-user /usr/sbin/php-fpm

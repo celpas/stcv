@@ -144,7 +144,7 @@
 				</tr>
 			</table>
 		</div>
-		<p class="mt-2 mb-3 text-muted">&copy; 2022 &bull; v0.8.5</p>
+		<p class="mt-2 mb-3 text-muted">STCV &bull; v0.8.6</p>
 	</main>
 </body>
 
