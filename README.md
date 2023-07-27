@@ -1,35 +1,29 @@
-# SageMaker Toolkit for Computer Vision
+# SageMaker Toolkit for Computer Vision (STCV)
 
-![alt splash](_data/splash.jpeg)
+![alt splash](images/splash.png)
 
 
 ## Features
 
 - Persistent conda environments
 - S3 bucket mounting
-- Upgrade of jupyter-server-proxy
-- Some useful tools: VS Code, Label Studio, FiftyOne, TensorBoard, elFinder and eZ Server Monitor
+- Dockerized
+- Several tools accessible with just 1 click: VS Code, Label Studio, FiftyOne, TensorBoard, MLFlow, elFinder and eZ Server Monitor
 
 
 ## Instructions
 
-1. Set [lifecycle configuration](/lifecycle_sm.bash) to your SageMaker notebook instance (remember to set your bucket name).
-2. Visit ```https://<<INSTANCE_NAME>>.notebook.<<REGION>>.sagemaker.aws/proxy/1199/```.
-3. Done!
-
-Note that VSCode starts automatically while for other tools the relative notebook should be used.
-
-
-## Requirements
-
-A notebook instance with Amazon Linux 2.
-
-
-## How to update a lifecycle using CLI?
-
+1. Clone STCV repository
 ```bash
-LIFECYCLE_CONFIG_NAME="<<LIFECYCLE_NAME>>"
-aws sagemaker update-notebook-instance-lifecycle-config \
-    --notebook-instance-lifecycle-config-name "$LIFECYCLE_CONFIG_NAME" \
-    --on-start Content="$((cat lifecycle_sm.bash) | base64 -w 0)"
+git clone https://github.com/celpas/stcv.git /home/ec2-user/SageMaker/_stcv
 ```
+
+2. Build Docker image using the notebook `1_first_start.ipynb`
+3. Create/update lifecycle using the notebook `2_lifecycle_create_update.ipynb`
+4. Launch container using the notebook `3_docker_launch_container.ipynb`
+5. `https://<BASE_URL>/proxy/1123/`
+
+
+## Structure
+
+![alt struture](images/structure.png)
