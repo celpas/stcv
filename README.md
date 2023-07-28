@@ -8,7 +8,14 @@
 - Persistent conda environments
 - S3 bucket mounting
 - Dockerized
-- Several tools accessible with just 1 click: VS Code, Label Studio, FiftyOne, TensorBoard, MLFlow, elFinder and eZ Server Monitor
+- Several tools accessible with just 1 click:
+    - VS Code
+    - Label Studio
+    - FiftyOne
+    - TensorBoard
+    - MLFlow
+    - elFinder
+    - eZ Server Monitor
 
 
 ## Instructions
