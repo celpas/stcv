@@ -168,25 +168,6 @@ $opts = array(
 			'mimeDetect'      => 'internal'
 		),
 		array(
-			'alias'           => 'S3',
-			'driver'          => 'LocalFileSystem',
-			'path'            => '/mnt/bucket/',
-			'imgLib'          => 'auto',
-			'tmbPath'         => '../../../../../../home/ec2-user/.thumb',
-			'tmbURL'          => '/proxy/1199/files/home/ec2-user/.thumb/',
-			'tmbSize'         => 92,
-			'tmbCrop'         => false,
-			'trashHash'       => '',
-			'winHashFix'      => DIRECTORY_SEPARATOR !== '/',
-			//'uploadDeny'    => array('all'),
-			'uploadAllow'     => array('all'),
-			'uploadOrder'     => array('allow'),
-			'accessControl'   => 'access',
-			'checkSubfolders' => false,
-			'treeDeep'        => 1,
-			'mimeDetect'      => 'internal'
-		),
-		array(
 			'alias'           => 'Root',
 			'driver'          => 'LocalFileSystem',
 			'path'            => '/',
@@ -207,6 +188,56 @@ $opts = array(
 		),
 	)
 );
+
+if (!empty($_ENV["STCV_BUCKET_1_NAME"])) {
+	array_push(
+		$opts["roots"],
+		array(
+			'alias'           => 'S3 (1)',
+			'driver'          => 'LocalFileSystem',
+			'path'            => $_ENV["STCV_BUCKET_1_MNT_DIR"],
+			'imgLib'          => 'auto',
+			'tmbPath'         => '/home/ec2-user/.thumb',
+			'tmbURL'          => '/proxy/1123/files/home/ec2-user/.thumb/',
+			'tmbSize'         => 92,
+			'tmbCrop'         => false,
+			'trashHash'       => '',
+			'winHashFix'      => DIRECTORY_SEPARATOR !== '/',
+			//'uploadDeny'    => array('all'),
+			'uploadAllow'     => array('all'),
+			'uploadOrder'     => array('allow'),
+			'accessControl'   => 'access',
+			'checkSubfolders' => false,
+			'treeDeep'        => 1,
+			'mimeDetect'      => 'internal'
+		),
+	);
+}
+
+if (!empty($_ENV["STCV_BUCKET_2_NAME"])) {
+	array_push(
+		$opts["roots"],
+		array(
+			'alias'           => 'S3 (2)',
+			'driver'          => 'LocalFileSystem',
+			'path'            => $_ENV["STCV_BUCKET_2_MNT_DIR"],
+			'imgLib'          => 'auto',
+			'tmbPath'         => '/home/ec2-user/.thumb',
+			'tmbURL'          => '/proxy/1123/files/home/ec2-user/.thumb/',
+			'tmbSize'         => 92,
+			'tmbCrop'         => false,
+			'trashHash'       => '',
+			'winHashFix'      => DIRECTORY_SEPARATOR !== '/',
+			//'uploadDeny'    => array('all'),
+			'uploadAllow'     => array('all'),
+			'uploadOrder'     => array('allow'),
+			'accessControl'   => 'access',
+			'checkSubfolders' => false,
+			'treeDeep'        => 1,
+			'mimeDetect'      => 'internal'
+		),
+	);
+}
 
 // run elFinder
 $connector = new elFinderConnector(new elFinder($opts));
