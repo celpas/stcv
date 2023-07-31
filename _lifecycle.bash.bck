@@ -3,20 +3,20 @@
 STCV_DIR="/home/ec2-user/SageMaker/.stcv"
 
 STCV_DOCKER_DIR="${STCV_DIR}/docker_data_dir"
-STCV_PERSISTED_CONDA_DIR="${STCV_DIR}/persisted_conda_data_dir"
+STCV_PERSISTENT_CONDA_DIR="${STCV_DIR}/persistent_conda_data_dir"
 
 
-echo "=> Setting up persisted conda environments"
-mkdir -p ${STCV_PERSISTED_CONDA_DIR} && chown ec2-user:ec2-user ${STCV_PERSISTED_CONDA_DIR}
+echo "=> Setting up persistent conda environments"
+mkdir -p ${STCV_PERSISTENT_CONDA_DIR} && chown ec2-user:ec2-user ${STCV_PERSISTENT_CONDA_DIR}
 envdirs_clean=$(grep "envs_dirs:" /home/ec2-user/.condarc || echo "clean")
 if [[ "${envdirs_clean}" != "clean" ]]; then
     echo "envs_dirs config already exists in /home/ec2-user/.condarc. No idea what to do. Exiting!"
     exit 1
 fi
-echo "Adding ${STCV_PERSISTED_CONDA_DIR} to list of conda env locations"
+echo "Adding ${STCV_PERSISTENT_CONDA_DIR} to list of conda env locations"
 cat << EOF >> /home/ec2-user/.condarc
 envs_dirs:
-  - ${STCV_PERSISTED_CONDA_DIR}
+  - ${STCV_PERSISTENT_CONDA_DIR}
   - /home/ec2-user/anaconda3/envs
 EOF
 
@@ -41,3 +41,6 @@ fi
 sudo rm -rf /var/lib/docker
 sudo ln -s ${STCV_DOCKER_DIR} /var/lib/docker
 sudo service docker start
+
+
+# docker start {container_id}

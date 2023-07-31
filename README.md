@@ -18,7 +18,7 @@
     - eZ Server Monitor
 
 
-## Instructions
+## Getting started
 
 1. Clone STCV repository
 ```bash
