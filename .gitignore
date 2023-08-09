@@ -1,5 +1,6 @@
 _configuration.env
 _lifecycle.bash
+_describe_output.txt
 
 # Created by https://www.gitignore.io/api/python
 # Edit at https://www.gitignore.io/?templates=python

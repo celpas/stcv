@@ -20,7 +20,7 @@ ENV STCV_FIFTYONE_3_BUILD="$STCV_FIFTYONE_3_BUILD"
 # => Versions
 ENV STCV_PYTHON_VERSION="3.8"
 ENV STCV_NODE_VERSION="18.13.0"
-ENV STCV_CODESERVER_VERSION="4.15.0"
+ENV STCV_CODESERVER_VERSION="4.16.1"
 ENV STCV_FIFTYONE_VERSION="0.21.4"
 ENV STCV_S3FS_VERSION="1.93"
 
@@ -68,7 +68,8 @@ RUN apt-get update && apt-get install -y gnupg curl && \
     autotools-dev \
     automake \
     nano \
-    sudo
+    sudo \
+    lsof
 
 # => Install miniconda & pip
 RUN curl -fsSL -v -o ${HOME}/miniconda.sh -O https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh && \
@@ -209,7 +210,11 @@ RUN sudo -u ec2-user wget https://raw.githubusercontent.com/coder/code-server/ma
     mkdir -p ${HOME}/.config/code-server && \
     cp ${STCV_CONFIGS_DIR}/config.yaml ${HOME}/.config/code-server/config.yaml && \
     code-server --install-extension ms-python.python --force && \
-    code-server --install-extension ms-toolsai.jupyter --force
+    code-server --install-extension ms-toolsai.jupyter --force && \
+    mkdir -p /home/ec2-user/.local/share/code-server && \
+    mkdir -p /home/ec2-user/.local/share/code-server/User && \
+    rm -rf /home/ec2-user/.local/share/code-server/User/settings.json && \
+    cp ${STCV_CONFIGS_DIR}/settings.json /home/ec2-user/.local/share/code-server/User/settings.json
 
 # => nginx
 RUN sudo rm -rf /etc/nginx/nginx.conf && \

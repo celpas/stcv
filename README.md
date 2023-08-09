@@ -34,3 +34,11 @@ git clone https://github.com/celpas/stcv.git /home/ec2-user/SageMaker/_stcv
 ## Structure
 
 ![alt struture](images/structure.png)
+
+
+## Frequently Asked Questions
+
+### How to use MLFLow?
+
+1. Use the notebook `retrieve_instace_metadata.ipynb` to retrieve the ip address of your notebook instance
+2. Use `http://<ip_address>:6004|6005` as tracking uri

@@ -4,6 +4,7 @@ STCV_DIR="/home/ec2-user/SageMaker/.stcv"
 
 STCV_DOCKER_DIR="${STCV_DIR}/docker_data_dir"
 STCV_PERSISTENT_CONDA_DIR="${STCV_DIR}/persistent_conda_data_dir"
+STCV_CONTAINER_ID=
 
 
 echo "=> Setting up persistent conda environments"
@@ -21,10 +22,14 @@ envs_dirs:
 EOF
 
 
-# cat << EOF >> /home/ec2-user/.bashrc
-# export ENV_VAR=example
-# EOF
-# source /home/ec2-user/.bashrc
+echo "=> Setting persistent environment variables"
+cat << EOF >> /home/ec2-user/.bashrc
+
+export FIFTYONE_DATABASE_URI=mongodb://127.0.0.1:27017
+export FIFTYONE_DEFAULT_DATASET_DIR=/home/ec2-user/SageMaker/.stcv/fiftyone_data_dir
+
+EOF
+source /home/ec2-user/.bashrc
 
 
 echo "=> Updating Jupyter Server Proxy"
@@ -43,4 +48,10 @@ sudo ln -s ${STCV_DOCKER_DIR} /var/lib/docker
 sudo service docker start
 
 
-# docker start {container_id}
+if [ ! -z "${STCV_CONTAINER_ID}" ]
+then
+  echo "=> Running container with ID ${STCV_CONTAINER_ID}"
+  docker run ${STCV_CONTAINER_ID}
+else
+  echo "=> No Docker container to start"
+fi
