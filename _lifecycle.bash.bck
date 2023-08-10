@@ -53,7 +53,7 @@ if [ -f "${STCV_AUTOSTART_FILE}" ]; then
   export STCV_CONTAINER_ID=$(cat ${STCV_AUTOSTART_FILE})
   echo "Read container ID ${STCV_CONTAINER_ID} from ${STCV_AUTOSTART_FILE}"
   echo "=> Checking if container exists"
-  CID=$(docker ps -a -q -f id=${CONTAINER_NAME})
+  CID=$(docker ps -a -q -f id=${STCV_CONTAINER_ID})
   if [ ! "${CID}" ]; then
     echo "=> Container does not exist"
   else
