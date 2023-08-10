@@ -1,7 +1,7 @@
 #!/bin/bash
 
 STCV_DIR="/home/ec2-user/SageMaker/.stcv"
-STCV_DOCKER_DIR=$1
+STCV_DOCKER_DIR="${STCV_DIR}/docker_data_dir"
 
 sudo -u ec2-user mkdir -p ${STCV_DIR}
 
