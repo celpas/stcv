@@ -8,7 +8,7 @@ STCV_CONTAINER_ID=
 
 
 echo "=> Setting up persistent conda environments"
-mkdir -p ${STCV_PERSISTENT_CONDA_DIR} && chown ec2-user:ec2-user ${STCV_PERSISTENT_CONDA_DIR}
+mkdir -p ${STCV_DIR} && mkdir -p ${STCV_PERSISTENT_CONDA_DIR} && chown ec2-user:ec2-user ${STCV_PERSISTENT_CONDA_DIR}
 envdirs_clean=$(grep "envs_dirs:" /home/ec2-user/.condarc || echo "clean")
 if [[ "${envdirs_clean}" != "clean" ]]; then
     echo "envs_dirs config already exists in /home/ec2-user/.condarc. No idea what to do. Exiting!"
