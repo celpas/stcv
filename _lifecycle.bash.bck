@@ -4,7 +4,7 @@ STCV_DIR="/home/ec2-user/SageMaker/.stcv"
 
 STCV_DOCKER_DIR="${STCV_DIR}/docker_data_dir"
 STCV_PERSISTENT_CONDA_DIR="${STCV_DIR}/persistent_conda_data_dir"
-STCV_CONTAINER_ID=
+STCV_AUTOSTART_FILE="${STCV_DIR}/autostart.conf"
 
 sudo -u ec2-user mkdir -p ${STCV_DIR}
 
@@ -49,10 +49,10 @@ sudo ln -s ${STCV_DOCKER_DIR} /var/lib/docker
 sudo service docker start
 
 
-if [ ! -z "${STCV_CONTAINER_ID}" ]
-then
+if [ -f "${STCV_AUTOSTART_FILE}" ]; then
+  export STCV_CONTAINER_ID=$(cat ${STCV_AUTOSTART_FILE})
   echo "=> Running container with ID ${STCV_CONTAINER_ID}"
   docker run ${STCV_CONTAINER_ID}
 else
-  echo "=> No Docker container to start"
+  echo "=> No container ID found in ${STCV_AUTOSTART_FILE}. Not starting any container."
 fi
