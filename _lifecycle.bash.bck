@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -e
+
 STCV_DIR="/home/ec2-user/SageMaker/.stcv"
 
 STCV_DOCKER_DIR="${STCV_DIR}/docker_data_dir"
