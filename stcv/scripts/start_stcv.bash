@@ -20,7 +20,7 @@ if [ ! -z "${STCV_BUCKET_2_NAME}" ]
 then
     echo "Mounting bucket ${STCV_BUCKET_2_NAME} to ${STCV_BUCKET_2_MNT_DIR}"
     sudo umount -f ${STCV_BUCKET_2_MNT_DIR}
-    sudo -u ec2-user mkdir -p "{$STCV_BUCKET_2_MNT_DIR}"
+    sudo -u ec2-user mkdir -p "${STCV_BUCKET_2_MNT_DIR}"
     sudo s3fs ${STCV_BUCKET_2_NAME} ${STCV_BUCKET_2_MNT_DIR} -o allow_other -o uid=1000,gid=1000,endpoint=eu-central-1,iam_role=auto
     sudo ln -s ${STCV_BUCKET_2_MNT_DIR} /mnt/bucket_secondary
 else
