@@ -51,8 +51,15 @@ sudo service docker start
 
 if [ -f "${STCV_AUTOSTART_FILE}" ]; then
   export STCV_CONTAINER_ID=$(cat ${STCV_AUTOSTART_FILE})
-  echo "=> Running container with ID ${STCV_CONTAINER_ID}"
-  docker run ${STCV_CONTAINER_ID}
+  echo "Read container ID ${STCV_CONTAINER_ID} from ${STCV_AUTOSTART_FILE}"
+  echo "=> Checking if container exists"
+  CID=$(docker ps -a -q -f id=${CONTAINER_NAME})
+  if [ ! "${CID}" ]; then
+    echo "=> Container does not exist"
+  else
+    echo "=> Container exists. Starting..."
+    docker run ${STCV_CONTAINER_ID}
+  fi
 else
   echo "=> No container ID found in ${STCV_AUTOSTART_FILE}. Not starting any container."
 fi
