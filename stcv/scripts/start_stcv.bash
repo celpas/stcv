@@ -1,6 +1,7 @@
 #!/bin/bash
 
 sudo -u ec2-user mkdir -p ${STCV_DIR}
+sudo chown ec2-user:ec2-user ${STCV_DIR}
 
 #########
 
