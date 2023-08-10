@@ -3,6 +3,8 @@
 STCV_DIR="/home/ec2-user/SageMaker/.stcv"
 STCV_DOCKER_DIR=$1
 
+sudo -u ec2-user mkdir -p ${STCV_DIR}
+
 echo "=> Changing Docker images directory from /var/lib/docker to ${STCV_DOCKER_DIR}"
 sudo service docker stop
 if [ ! -d ${STCV_DOCKER_DIR} ]; then
