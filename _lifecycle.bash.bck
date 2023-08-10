@@ -58,7 +58,7 @@ if [ -f "${STCV_AUTOSTART_FILE}" ]; then
     echo "=> Container does not exist"
   else
     echo "=> Container exists. Starting..."
-    docker run ${STCV_CONTAINER_ID}
+    docker start ${STCV_CONTAINER_ID}
   fi
 else
   echo "=> No container ID found in ${STCV_AUTOSTART_FILE}. Not starting any container."
