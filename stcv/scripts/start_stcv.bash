@@ -96,13 +96,13 @@ echo "Starting TensorBoard"
 if [ ${STCV_TENSORBOARD_1_ENABLE} = "True" ]
 then
     sudo -u ec2-user mkdir -p ${STCV_TENSORBOARD_1_DATA_DIR}
-    tensorboard --logdir=${STCV_TENSORBOARD_1_DATA_DIR} --port ${STCV_TENSORBOARD_1_PORT} > /dev/null 2>&1 &
+    tensorboard --logdir=${STCV_TENSORBOARD_1_DATA_DIR} --port ${STCV_TENSORBOARD_1_PORT} --detect_file_replacement=true > /dev/null 2>&1 &
 fi
 
 if [ ${STCV_TENSORBOARD_2_ENABLE} = "True" ]
 then
     sudo -u ec2-user mkdir -p ${STCV_TENSORBOARD_2_DATA_DIR}
-    tensorboard --logdir=${STCV_TENSORBOARD_2_DATA_DIR} --port ${STCV_TENSORBOARD_2_PORT} > /dev/null 2>&1 &
+    tensorboard --logdir=${STCV_TENSORBOARD_2_DATA_DIR} --port ${STCV_TENSORBOARD_2_PORT} --detect_file_replacement=true > /dev/null 2>&1 &
 fi
 
 echo "Starting MLFlow"
