@@ -7,22 +7,30 @@ sudo chown ec2-user:ec2-user ${STCV_DIR}
 
 if [ ! -z "${STCV_BUCKET_1_NAME}" ]
 then
-    echo "Mounting bucket ${STCV_BUCKET_1_NAME} to ${STCV_BUCKET_1_MNT_DIR}"
+    echo "Mounting bucket ${STCV_BUCKET_1_NAME} with s3fs to ${STCV_BUCKET_1_MNT_DIR}"
     sudo umount -f ${STCV_BUCKET_1_MNT_DIR}
     sudo -u ec2-user mkdir -p "${STCV_BUCKET_1_MNT_DIR}"
     sudo s3fs ${STCV_BUCKET_1_NAME} ${STCV_BUCKET_1_MNT_DIR} -o allow_other -o uid=1000,gid=1000,endpoint=eu-central-1,iam_role=auto
     sudo ln -s ${STCV_BUCKET_1_MNT_DIR} /mnt/bucket
+
+    echo "Mounting bucket ${STCV_BUCKET_1_NAME} with mount-s3 to ${STCV_BUCKET_1_FAST_MNT_DIR}"
+    sudo -u ec2-user mkdir -p ${STCV_BUCKET_1_FAST_MNT_DIR}
+    sudo mount-s3 ${STCV_BUCKET_1_NAME} ${STCV_BUCKET_1_FAST_MNT_DIR} --allow-other
 else
     echo "Bucket 1 not set!"
 fi
 
 if [ ! -z "${STCV_BUCKET_2_NAME}" ]
 then
-    echo "Mounting bucket ${STCV_BUCKET_2_NAME} to ${STCV_BUCKET_2_MNT_DIR}"
+    echo "Mounting bucket ${STCV_BUCKET_2_NAME} with s3fs to ${STCV_BUCKET_2_MNT_DIR}"
     sudo umount -f ${STCV_BUCKET_2_MNT_DIR}
     sudo -u ec2-user mkdir -p "${STCV_BUCKET_2_MNT_DIR}"
     sudo s3fs ${STCV_BUCKET_2_NAME} ${STCV_BUCKET_2_MNT_DIR} -o allow_other -o uid=1000,gid=1000,endpoint=eu-central-1,iam_role=auto
     sudo ln -s ${STCV_BUCKET_2_MNT_DIR} /mnt/bucket_secondary
+
+    echo "Mounting bucket ${STCV_BUCKET_2_NAME} with mount-s3 to ${STCV_BUCKET_2_FAST_MNT_DIR}"
+    sudo -u ec2-user mkdir -p ${STCV_BUCKET_2_FAST_MNT_DIR}
+    sudo mount-s3 ${STCV_BUCKET_2_NAME} ${STCV_BUCKET_2_FAST_MNT_DIR} --allow-other
 else
     echo "Bucket 2 not set!"
 fi
@@ -96,13 +104,13 @@ echo "Starting TensorBoard"
 if [ ${STCV_TENSORBOARD_1_ENABLE} = "True" ]
 then
     sudo -u ec2-user mkdir -p ${STCV_TENSORBOARD_1_DATA_DIR}
-    tensorboard --logdir=${STCV_TENSORBOARD_1_DATA_DIR} --port ${STCV_TENSORBOARD_1_PORT} > /dev/null 2>&1 &
+    tensorboard --logdir=${STCV_TENSORBOARD_1_DATA_DIR} --port ${STCV_TENSORBOARD_1_PORT} --detect_file_replacement=true > /dev/null 2>&1 &
 fi
 
 if [ ${STCV_TENSORBOARD_2_ENABLE} = "True" ]
 then
     sudo -u ec2-user mkdir -p ${STCV_TENSORBOARD_2_DATA_DIR}
-    tensorboard --logdir=${STCV_TENSORBOARD_2_DATA_DIR} --port ${STCV_TENSORBOARD_2_PORT} > /dev/null 2>&1 &
+    tensorboard --logdir=${STCV_TENSORBOARD_2_DATA_DIR} --port ${STCV_TENSORBOARD_2_PORT} --detect_file_replacement=true > /dev/null 2>&1 &
 fi
 
 echo "Starting MLFlow"

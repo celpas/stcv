@@ -18,10 +18,10 @@ ENV STCV_FIFTYONE_2_BUILD="$STCV_FIFTYONE_2_BUILD"
 ENV STCV_FIFTYONE_3_BUILD="$STCV_FIFTYONE_3_BUILD"
 
 # => Versions
-ENV STCV_PYTHON_VERSION="3.8"
+ENV STCV_PYTHON_VERSION="3.9"
 ENV STCV_NODE_VERSION="18.13.0"
-ENV STCV_CODESERVER_VERSION="4.16.1"
-ENV STCV_FIFTYONE_VERSION="0.21.4"
+ENV STCV_CODESERVER_VERSION="4.17.0"
+ENV STCV_FIFTYONE_VERSION="0.22.0"
 ENV STCV_S3FS_VERSION="1.93"
 
 # => Fiftyone ports
@@ -91,6 +91,11 @@ RUN git clone https://github.com/s3fs-fuse/s3fs-fuse.git ${HOME}/s3fs-fuse --dep
     cd ${HOME} && \
     rm -rf s3fs-fuse && \
     echo user_allow_other >> /etc/fuse.conf
+
+# => Install mount-s3
+RUN wget https://s3.amazonaws.com/mountpoint-s3-release/latest/x86_64/mount-s3.deb -O ${HOME}/mount-s3.deb && \
+    apt-get install -y ${HOME}/mount-s3.deb && \
+    echo "user_allow_other" | tee /etc/fuse.conf
 
 # => Create ec2-user
 RUN userdel ubuntu && \
