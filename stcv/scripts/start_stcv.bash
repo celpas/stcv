@@ -14,6 +14,7 @@ then
     sudo ln -s ${STCV_BUCKET_1_MNT_DIR} /mnt/bucket
 
     echo "Mounting bucket ${STCV_BUCKET_1_NAME} with mount-s3 to ${STCV_BUCKET_1_FAST_MNT_DIR}"
+    sudo umount -f ${STCV_BUCKET_1_FAST_MNT_DIR}
     sudo -u ec2-user mkdir -p ${STCV_BUCKET_1_FAST_MNT_DIR}
     sudo mount-s3 ${STCV_BUCKET_1_NAME} ${STCV_BUCKET_1_FAST_MNT_DIR} --allow-other
 else
@@ -29,6 +30,7 @@ then
     sudo ln -s ${STCV_BUCKET_2_MNT_DIR} /mnt/bucket_secondary
 
     echo "Mounting bucket ${STCV_BUCKET_2_NAME} with mount-s3 to ${STCV_BUCKET_2_FAST_MNT_DIR}"
+    sudo umount -f ${STCV_BUCKET_2_FAST_MNT_DIR}
     sudo -u ec2-user mkdir -p ${STCV_BUCKET_2_FAST_MNT_DIR}
     sudo mount-s3 ${STCV_BUCKET_2_NAME} ${STCV_BUCKET_2_FAST_MNT_DIR} --allow-other
 else
