@@ -94,7 +94,7 @@ RUN git clone https://github.com/s3fs-fuse/s3fs-fuse.git ${HOME}/s3fs-fuse --dep
 
 # => Install mount-s3
 RUN wget https://s3.amazonaws.com/mountpoint-s3-release/latest/x86_64/mount-s3.deb -O ${HOME}/mount-s3.deb && \
-    apt-get install -y ${HOME}/mount-s3.deb && \
+    apt-get install -o DPkg::Options::="--force-confnew" -y ${HOME}/mount-s3.deb && \
     echo "user_allow_other" | tee /etc/fuse.conf
 
 # => Create ec2-user
